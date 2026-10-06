@@ -2,19 +2,16 @@
 session_start();
 require_once __DIR__ . '/../config/conexao.php';
 
-// Bloqueia acesso de usuários não logados
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: ../pagina-inicial/index.php");
     exit;
 }
 
-// Garante que apenas Administradores fiquem nesta página
 if (isset($_SESSION['papel']) && $_SESSION['papel'] !== 'administrador') {
     header("Location: ../dashboard/dashboard.php");
     exit;
 }
 
-// Busca o primeiro nome do usuário logado
 if (isset($_SESSION['nome']) && !empty($_SESSION['nome'])) {
     $nome_completo = $_SESSION['nome'];
 } else {
@@ -117,10 +114,8 @@ $primeiro_nome = $partes_nome[0];
             </div>
         </section>
 
-        <!-- Grade de Alertas e Sensores -->
         <section class="dashboard-grid">
             
-            <!-- Card Alertas Ativos -->
             <div class="card-panel">
                 <h2 class="panel-header">Alertas Ativos</h2>
                 
@@ -145,7 +140,6 @@ $primeiro_nome = $partes_nome[0];
                 </ul>
             </div>
 
-            <!-- Card Sensores Críticos -->
             <div class="card-panel">
                 <h2 class="panel-header">Sensores críticos</h2>
                 
